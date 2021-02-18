@@ -11,5 +11,24 @@
 
     <artifactId>common_utils</artifactId>
 
+<!--    <dependencies>-->
+<!--    &lt;!&ndash; redis &ndash;&gt;-->
+<!--    <dependency>-->
+<!--        <groupId>org.springframework.boot</groupId>-->
+<!--        <artifactId>spring-boot-starter-data-redis</artifactId>-->
+<!--    </dependency>-->
+<!--    &lt;!&ndash; spring2.X集成redis所需common-pool2&ndash;&gt;-->
+<!--    <dependency>-->
+<!--        <groupId>org.apache.commons</groupId>-->
+<!--        <artifactId>commons-pool2</artifactId>-->
+<!--    </dependency>-->
+<!--    </dependencies>-->
+    <dependencies>
+        <!-- JWT-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
