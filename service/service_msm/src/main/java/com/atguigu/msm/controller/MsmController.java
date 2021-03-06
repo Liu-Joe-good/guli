@@ -29,6 +29,7 @@ public class MsmController {
     @GetMapping("/send/{phone}")
     public R code(@PathVariable String phone){
         // 如何设置验证码时间呢？使用redis，来设置时间
+        // 获取redis中key为phone的值
         String o = redisTemplate.opsForValue().get(phone);
         // 不为空表示已发送，不做下面的处理
         if (!StringUtils.isEmpty(o)){
@@ -41,13 +42,16 @@ public class MsmController {
         stringStringHashMap.put("code",sixBitRandom);
 
         // 调用service
-        boolean flag=msmService.send(stringStringHashMap,phone);
-        if(flag){
-            // 设置超时为5分钟
-            redisTemplate.opsForValue().set(phone,o, 5,TimeUnit.MINUTES);
-            return R.ok();
-        }else {
-            return R.error().message("发送短信失败");
-        }
+        //boolean flag=msmService.send(stringStringHashMap,phone);
+//        if(flag){
+//            // 设置超时为5分钟
+//            redisTemplate.opsForValue().set(phone,o, 5,TimeUnit.MINUTES);
+//            return R.ok();
+//        }else {
+//            return R.error().message("发送短信失败");
+//        }
+        // 因为阿里云要网站备案，故现在可模拟阿里云生成短信服务,把上面的注释掉
+        redisTemplate.opsForValue().set(phone,sixBitRandom,5,TimeUnit.MINUTES);
+        return R.ok();
     }
 }

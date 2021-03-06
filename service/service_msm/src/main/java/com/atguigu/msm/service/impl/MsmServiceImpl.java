@@ -36,7 +36,7 @@ public class MsmServiceImpl implements MsmService {
         request.putQueryParameter("SignName", "我的谷粒在线教育网站"); // 阿里云里签名管理里的名称
         request.putQueryParameter("TemplateCode", "SMS_211491062"); // 阿里云里模板管理里的模板code
         // JSONObject.toJSONString为maven里面引入的fastjson依赖里转换工具里的,传的是json格式的(传map的好处)
-        request.putQueryParameter("TemplateParam", JSONObject.toJSONString(sixBitRandom));
+        request.putQueryParameter("TemplateParam", JSONObject.toJSONString(sixBitRandom)); // 验证码
 
         // 最终发送
         try{

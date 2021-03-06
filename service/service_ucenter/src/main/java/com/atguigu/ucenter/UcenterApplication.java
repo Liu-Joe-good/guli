@@ -1,4 +1,4 @@
-package com.aiguigu.ucenter;
+package com.atguigu.ucenter;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
