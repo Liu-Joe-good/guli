@@ -92,6 +92,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
         if(two!=null){
             throw new GuliException(20001,"昵称已存在");
         }
+        // 获取redis中key键对应的值
         String o = redisTemplate.opsForValue().get(mobile);
 
         if(o==null || !o.equals(code)){
@@ -113,5 +114,13 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
         }else {
             return false;
         }
+    }
+
+    @Override
+    public Member judgeOpenid(String openid) {
+        QueryWrapper<Member> wrapper = new QueryWrapper<>();
+        wrapper.eq("openid",openid);
+        Member one = memberService.getOne(wrapper);
+        return one;
     }
 }

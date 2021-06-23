@@ -143,7 +143,7 @@ public class EduTeacherController {
                            @ApiParam(value = "老师对象", name = "teacher", required = true) @RequestBody EduTeacher eduTeacher) {
         eduTeacher.setId(id);
         boolean update = eduTeacherService.updateById(eduTeacher);
-        //int a=10/0; // 测试异常处理
+        //int a=10/0; // 测试异常处理r
         /*try {
             int a = 10 / 0;
         } catch (Exception e) {
