@@ -5,8 +5,11 @@ import com.aliyun.vod.upload.req.UploadStreamRequest;
 import com.aliyun.vod.upload.resp.UploadStreamResponse;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.exceptions.ClientException;
+import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.vod.model.v20170321.DeleteVideoRequest;
 import com.aliyuncs.vod.model.v20170321.DeleteVideoResponse;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthRequest;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthResponse;
 import com.atguigu.oss.servicebase.exceptionhandler.GuliException;
 import com.atguigu.vod.service.uploadVideoService;
 import com.atguigu.vod.util.ConstantPropertiesUtils;
@@ -101,6 +104,29 @@ public class uploadVideoServiceImpl implements uploadVideoService {
             e.printStackTrace();
             throw new GuliException(20001, "批量删除视频失败");
         }
+    }
+
+    @Override
+    public String getPlayauthById(String id)  {
+        // 初始化
+        String regionId = "cn-shanghai";  // 点播服务接入区域
+        DefaultProfile profile = DefaultProfile.getProfile(regionId, ConstantPropertiesUtils.KEY_ID, ConstantPropertiesUtils.KEY_SECRET);
+        DefaultAcsClient client = new DefaultAcsClient(profile);
+        // 创建resquest
+        GetVideoPlayAuthRequest request = new GetVideoPlayAuthRequest();
+        // 把所要的视频id传入request对象中
+        request.setVideoId(id);
+        // 创建response
+        GetVideoPlayAuthResponse response = new GetVideoPlayAuthResponse();
+        try {
+            response = client.getAcsResponse(request);
+        }catch (ClientException e){
+            System.out.print("ErrorMessage = " + e.getLocalizedMessage());
+        }
+        // 获取播放凭证
+        String playAuth = response.getPlayAuth();
+        System.out.print("PlayAuth = " + response.getPlayAuth() + "\n");
+        return playAuth;
     }
 
     // 用于测试

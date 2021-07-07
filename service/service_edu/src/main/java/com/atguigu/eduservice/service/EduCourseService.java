@@ -1,9 +1,8 @@
 package com.atguigu.eduservice.service;
 
 import com.atguigu.eduservice.entity.EduCourse;
-import com.atguigu.eduservice.entity.vo.CourseInfoVo;
-import com.atguigu.eduservice.entity.vo.CoursePublishVo;
-import com.atguigu.eduservice.entity.vo.CourseQuery;
+import com.atguigu.eduservice.entity.vo.*;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -35,4 +34,18 @@ public interface EduCourseService extends IService<EduCourse> {
 
     List<EduCourse> getAllHotCourse();
 
+    /**
+     * 获取前台的课程列表
+     * @param page
+     * @param courseQueryVo
+     * @return
+     */
+    Map<String, Object> frontCourselist(Long current,Page<EduCourse> page, CourseQueryVo courseQueryVo);
+
+    /**
+     * 获取课程的详细信息
+     * @param id
+     * @return
+     */
+    CourseWebVo getCourseById(String id);
 }

@@ -2,9 +2,7 @@ package com.atguigu.eduservice.service.impl;
 
 import com.atguigu.eduservice.entity.EduCourse;
 import com.atguigu.eduservice.entity.EduCourseDescription;
-import com.atguigu.eduservice.entity.vo.CourseInfoVo;
-import com.atguigu.eduservice.entity.vo.CoursePublishVo;
-import com.atguigu.eduservice.entity.vo.CourseQuery;
+import com.atguigu.eduservice.entity.vo.*;
 import com.atguigu.eduservice.mapper.EduCourseMapper;
 import com.atguigu.eduservice.service.EduChapterService;
 import com.atguigu.eduservice.service.EduCourseDescriptionService;
@@ -186,6 +184,54 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         euCourseWrapper.last("limit 8");
         List<EduCourse> eduCourses = baseMapper.selectList(euCourseWrapper);
         return eduCourses;
+    }
+
+    @Override
+    public Map<String, Object> frontCourselist(Long current,Page<EduCourse> page, CourseQueryVo courseQueryVo) {
+        HashMap<String, Object> map = new HashMap<>();
+        QueryWrapper<EduCourse> wrapper = new QueryWrapper<>();
+        // 根据课程类别选择分类显示课程
+        if(!StringUtils.isEmpty(courseQueryVo.getSubjectParentId())){
+            wrapper.eq("subject_parent_id",courseQueryVo.getSubjectParentId());
+        }
+        if(!StringUtils.isEmpty(courseQueryVo.getSubjectId())){
+            wrapper.eq("subject_id",courseQueryVo.getSubjectId());
+        }
+        // 根据 关注度(销量) 最新(创建时间) 价格 分类
+        if(!StringUtils.isEmpty(courseQueryVo.getBuyCountSort())){
+            wrapper.orderByDesc("buy_count");
+        }
+        if(!StringUtils.isEmpty(courseQueryVo.getGmtCreateSort())){
+            wrapper.orderByDesc("gmt_create");
+        }
+        if(!StringUtils.isEmpty(courseQueryVo.getPriceSort())){
+            wrapper.orderByDesc("price");
+        }
+        // 发布后才能看到课程
+        wrapper.eq("status","Normal");
+        // 调用MP方法，翻页查询
+        eduCourseService.page(page, wrapper);
+        // 再把page的属性取出
+        boolean hasPrevious = page.hasPrevious();
+        boolean hasNext = page.hasNext();
+        long pages = page.getPages();
+        long size = page.getSize();
+        long total = page.getTotal();
+        List<EduCourse> records = page.getRecords();
+        map.put("current",current);
+        map.put("items", records);
+        map.put("pages", pages);
+        map.put("size", size);
+        map.put("total", total);
+        map.put("hasNext", hasNext);
+        map.put("hasPrevious", hasPrevious);
+        return map;
+    }
+
+    @Override
+    public CourseWebVo getCourseById(String id) {
+        CourseWebVo courseWebVo = baseMapper.getCourseById(id);
+        return courseWebVo;
     }
 
 

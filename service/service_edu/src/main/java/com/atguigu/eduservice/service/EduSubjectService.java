@@ -18,5 +18,9 @@ import java.util.List;
 public interface EduSubjectService extends IService<EduSubject> {
     void saveSubjectData(MultipartFile file, EduSubjectService eduSubjectService);
 
+    /**
+     * 返回课程一二级分类数据
+     * @return
+     */
     List<OneSubject> getAllOneTwoData();
 }

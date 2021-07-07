@@ -12,7 +12,7 @@ public class test {
         // 创建resquest
         GetVideoPlayAuthRequest request = new GetVideoPlayAuthRequest();
         // 把所要的视频id传入request对象中
-        request.setVideoId("1b8213e8b41646789945057ca5e9b35e");
+        request.setVideoId("3784247a267c4f2292a641944bf563b3");
         // 调用初始化里面的方法，传递request
         return client.getAcsResponse(request);
     }

@@ -18,6 +18,11 @@ public interface EduVideoService extends IService<EduVideo> {
 
     List<EduVideo> getVideolistWithChapter(String chapterId);
 
+    /**
+     * 通过课程id查询所有小节
+     * @param courseId
+     * @return
+     */
     List<VideoVo> getVideolistWithCourse(String courseId);
 
     void deleteVideolistByCourseId(String courseId);

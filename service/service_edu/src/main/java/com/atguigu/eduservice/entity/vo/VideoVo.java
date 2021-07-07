@@ -16,6 +16,8 @@ public class VideoVo {
     @ApiModelProperty(value = "小节标题")
     private String title;
 
+    @ApiModelProperty(value = "小节视频ID")
+    private String videoSourceId;
 //    public VideoVo(String id,String title){
 //        this.id=id;
 //        this.title=title;

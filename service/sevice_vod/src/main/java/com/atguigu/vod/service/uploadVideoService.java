@@ -11,4 +11,10 @@ public interface uploadVideoService {
     void removeVideo(String videoSourceId) throws Exception;
 
     void removeVideoByChapterId(List<String> id);
+
+    /**
+     * 通过视频id获取阿里云视频凭证，从而实现播放
+     * @param id
+     */
+    String getPlayauthById(String id);
 }
