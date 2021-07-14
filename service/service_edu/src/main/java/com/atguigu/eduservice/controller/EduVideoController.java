@@ -71,8 +71,7 @@ public class EduVideoController {
             return R.error();
         }
     }
-
-    // TODO 这个方法后面需要完善，删除小节，视频也得删除
+    // TODO 这个方法后面需要完善，删除小节，视频也得删除（已完成）
     @ApiOperation("删除小节")
     @DeleteMapping("/deleteVideo/{videoId}")
     public R deleteVideo(@ApiParam("小节ID") @PathVariable String videoId){

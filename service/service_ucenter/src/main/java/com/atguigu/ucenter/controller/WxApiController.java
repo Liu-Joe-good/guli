@@ -75,7 +75,6 @@ public class WxApiController {
             HashMap hashMap = gson.fromJson(accessToken, HashMap.class);
             String access_token = (String) hashMap.get("access_token");
             String openid = (String) hashMap.get("openid");
-
             // 将微信用户信息存入表中
             // 首先判断当前用户信息是否已存入数据表中
             Member vxmember= memberService.judgeOpenid(openid);

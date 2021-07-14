@@ -1,5 +1,6 @@
-package com.atguigu.eduservice;
+package com.atguigu.orderservice;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -7,10 +8,10 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.atguigu"})
-//@EnableDiscoveryClient // 被注册中心发现(刚尝试不加此注解也可被注册中心发现)
-@EnableFeignClients // 服务调用的注解(用来做远程调用)
-public class EduApplication {
+@MapperScan("com.atguigu.orderservice.mapper")
+@EnableFeignClients // 用于远程调用
+public class OrderApplication {
     public static void main(String[] args) {
-        SpringApplication.run(EduApplication.class,args);
+        SpringApplication.run(OrderApplication.class,args);
     }
 }

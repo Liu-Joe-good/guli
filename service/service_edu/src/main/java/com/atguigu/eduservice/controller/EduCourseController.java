@@ -4,11 +4,14 @@ package com.atguigu.eduservice.controller;
 import com.atguigu.eduservice.entity.vo.CourseInfoVo;
 import com.atguigu.eduservice.entity.vo.CoursePublishVo;
 import com.atguigu.eduservice.entity.vo.CourseQuery;
+import com.atguigu.eduservice.entity.vo.CourseWebVo;
 import com.atguigu.eduservice.service.EduCourseService;
 import com.atguigu.oss.commonutils.R;
+import com.atguigu.oss.commonutils.orderVO.EduCourseOrder;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -102,6 +105,16 @@ public class EduCourseController {
         // eduCourseService.removeById(courseId);
         eduCourseService.removeCourse(courseId);
         return R.ok();
+    }
+
+    @ApiOperation(value = "通过id取课程信息")
+    @GetMapping("getCourseOrder/{courseId}")
+    public EduCourseOrder getCourseOrder(@PathVariable String courseId){
+        // 这里在公共模块上创建了实体类，然后通过copyProperties把获取的对象信息直接复制过来
+        CourseWebVo byId = eduCourseService.getCourseById(courseId);
+        EduCourseOrder eduCourseOrder = new EduCourseOrder();
+        BeanUtils.copyProperties(byId,eduCourseOrder);
+        return eduCourseOrder;
     }
 }
 

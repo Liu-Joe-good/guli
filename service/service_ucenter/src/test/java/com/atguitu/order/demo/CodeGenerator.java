@@ -1,4 +1,4 @@
-package com.atguigu.oss.demo;
+package com.atguitu.order.demo;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -25,8 +25,8 @@ public class CodeGenerator {
 
         // 2、全局配置
         GlobalConfig gc = new GlobalConfig();
-        //String projectPath = System.getProperty("user.dir");
-        gc.setOutputDir("D:\\IdeaProjects\\guli\\service\\service_edu" + "/src/main/java");
+        String projectPath = System.getProperty("user.dir");
+        gc.setOutputDir("D:\\IdeaProjects\\guli\\service\\service_ucenter" + "/src/main/java");
         gc.setAuthor("testjava");
         gc.setOpen(false); //生成后是否打开资源管理器
         gc.setFileOverride(false); //重新生成时文件是否覆盖
@@ -48,8 +48,8 @@ public class CodeGenerator {
 
         // 4、包配置
         PackageConfig pc = new PackageConfig();
-        pc.setModuleName("eduservice"); //模块名
-        pc.setParent("com.atguigu");
+        pc.setModuleName("ucenter"); //模块名
+        pc.setParent("com.aiguigu");
         pc.setController("controller");
         pc.setEntity("entity");
         pc.setService("service");
@@ -58,7 +58,7 @@ public class CodeGenerator {
 
         // 5、策略配置
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setInclude("edu_comment");
+        strategy.setInclude("ucenter_member");
         strategy.setNaming(NamingStrategy.underline_to_camel);//数据库表映射到实体的命名策略
         strategy.setTablePrefix(pc.getModuleName() + "_"); //生成实体时去掉表前缀
 

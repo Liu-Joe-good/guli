@@ -3,9 +3,11 @@ package com.atguigu.ucenter.controller;
 
 import com.atguigu.oss.commonutils.JwtUtils;
 import com.atguigu.oss.commonutils.R;
+import com.atguigu.oss.commonutils.orderVO.MemberOrder;
 import com.atguigu.ucenter.entity.Member;
 import com.atguigu.ucenter.entity.RegisterVo;
 import com.atguigu.ucenter.service.MemberService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 public class MemberController {
     @Autowired
     private MemberService memberService;
+
     // 登录
     @PostMapping("/login")
     public R loginUser(@RequestBody Member member){
@@ -46,13 +49,40 @@ public class MemberController {
         }
     }
 
-    // 通过token获取用户id
+    /**
+     * 通过token获取用户id
+     * @param httpServletRequest
+     * @return
+     */
     @GetMapping("/getMemberInfo")
     public R getMemberInfo(HttpServletRequest httpServletRequest){
         String memberIdByJwtToken = JwtUtils.getMemberIdByJwtToken(httpServletRequest);
-        // 取到用户名和密码，看与数据库是否有，有则提示登录成功
         Member byId = memberService.getById(memberIdByJwtToken);
         return R.ok().data("memberInfo",byId);
+    }
+
+    /**
+     * 通过用户id获取用户信息
+     * @param id
+     * @return
+     */
+    @GetMapping("/getMember/{id}")
+    public Member getMember(@PathVariable String id){
+        Member getMember = memberService.getById(id);
+        return getMember;
+    }
+
+    /**
+     * 通过用户id获取用户信息,用于接口调用
+     * @param id
+     * @return
+     */
+    @GetMapping("/getMemberOrder/{id}")
+    public MemberOrder getMemberOrder(@PathVariable String id){
+        Member getMember = memberService.getById(id);
+        MemberOrder memberOrder = new MemberOrder();
+        BeanUtils.copyProperties(getMember,memberOrder);
+        return memberOrder;
     }
 }
 
