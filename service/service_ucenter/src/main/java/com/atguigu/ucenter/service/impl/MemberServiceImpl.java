@@ -123,4 +123,12 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
         Member one = memberService.getOne(wrapper);
         return one;
     }
+
+    @Override
+    public Integer getRegisterCount(String day) {
+        QueryWrapper<Member> wrapper = new QueryWrapper<Member>();
+        wrapper.like("gmt_create",day);
+        Integer integer = baseMapper.selectCount(wrapper);
+        return integer;
+    }
 }

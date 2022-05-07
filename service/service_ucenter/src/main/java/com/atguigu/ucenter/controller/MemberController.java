@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
- * 会员表 前端控制器
+ * 前台实现登录
  * </p>
  *
  * @author testjava
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 @RequestMapping("/api/ucenter/member")
-@CrossOrigin
+//@CrossOrigin
 public class MemberController {
     @Autowired
     private MemberService memberService;
@@ -83,6 +83,17 @@ public class MemberController {
         MemberOrder memberOrder = new MemberOrder();
         BeanUtils.copyProperties(getMember,memberOrder);
         return memberOrder;
+    }
+
+    /**
+     * 统计某天注册总人数
+     * @param day
+     * @return
+     */
+    @GetMapping("/getRegisterCount/{day}")
+    public R getRegisterCount(@PathVariable String day){
+        Integer count =memberService.getRegisterCount(day);
+        return R.ok().data("registerCount",count);
     }
 }
 

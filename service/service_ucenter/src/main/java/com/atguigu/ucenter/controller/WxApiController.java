@@ -9,7 +9,6 @@ import com.atguigu.ucenter.util.HttpClientUtils;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -23,7 +22,7 @@ import java.util.HashMap;
  * @ClassName WxApiController
  * @Date 2021.06.16
  */
-@CrossOrigin
+//@CrossOrigin
 @Controller // RestController注解不使用的原因：它标记的类就是一个SpringMVC Controller 对象，但不需要返回json数据，使用的话会返回url的json数据
 @RequestMapping("/api/ucenter/wx")
 public class WxApiController {

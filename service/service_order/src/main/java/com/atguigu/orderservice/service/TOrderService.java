@@ -28,4 +28,12 @@ public interface TOrderService extends IService<TOrder> {
      * @return
      */
     Map createNative(String orderId);
+
+    /**
+     * 通过视频id和用户id来获取订单状态
+     * @param courseId
+     * @param userId
+     * @return
+     */
+    boolean getOrderStatus(String courseId, String userId);
 }

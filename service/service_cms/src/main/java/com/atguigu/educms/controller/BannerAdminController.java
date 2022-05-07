@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
  * @author testjava
  * @since 2021-02-01
  */
-@CrossOrigin
+//@CrossOrigin
 @RestController
 @RequestMapping("/educms/crm-bannerAdmin")
 @Api(description = "后台轮播图数据管理")

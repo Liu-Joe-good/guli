@@ -6,6 +6,7 @@ import com.atguigu.orderservice.service.TOrderService;
 import com.atguigu.oss.commonutils.JwtUtils;
 import com.atguigu.oss.commonutils.R;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/orderservice/t-order")
-@CrossOrigin
+//@CrossOrigin
 public class TOrderController {
     @Autowired
     TOrderService tOrderService;
@@ -35,8 +36,11 @@ public class TOrderController {
     public R saveOrder(HttpServletRequest httpServletRequest, @PathVariable String courseId){
         // 获取token中用户id
         String userId = JwtUtils.getMemberIdByJwtToken(httpServletRequest);
-        String tOrderNo = tOrderService.saveOrder(userId,courseId);
-        return R.ok().data("tOrderNo",tOrderNo);
+        if(StringUtils.isNotBlank(userId)){
+            String tOrderNo = tOrderService.saveOrder(userId,courseId);
+            return R.ok().data("tOrderNo",tOrderNo);
+        }
+        return R.error().data("status","未登录");
     }
 
     /**
@@ -54,14 +58,27 @@ public class TOrderController {
 
     /**
      * 生成微信支付二维码
-     * @param orderId
+     * @param orderNo
      * @return
      */
-    @GetMapping("createNative/{orderId}")
-    public R createNative(@PathVariable String orderId){
+    @GetMapping("createNative/{orderNo}")
+    public R createNative(@PathVariable String orderNo){
         // 返回包括二维码以及其他需要的信息
-        Map map=tOrderService.createNative(orderId);
+        Map map=tOrderService.createNative(orderNo);
+        System.out.println("生成微信支付二维码map集合"+map);
         return R.ok().data("map",map);
+    }
+
+    /**
+     * 通过视频id和用户id来获取订单状态
+     * @param courseId
+     * @param userId
+     * @return
+     */
+    @GetMapping("getOrderStatus/{courseId}/{userId}")
+    public boolean getOrderStatus(@PathVariable String courseId,@PathVariable String userId){
+        boolean s= tOrderService.getOrderStatus(courseId,userId);
+        return s;
     }
 }
 

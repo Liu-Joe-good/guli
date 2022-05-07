@@ -23,7 +23,7 @@ import java.util.List;
  * @author testjava
  * @since 2020-07-09
  */
-@CrossOrigin
+//@CrossOrigin
 @RestController
 @RequestMapping("/eduservice/edu-video")
 @Api(description = "课程小节管理")

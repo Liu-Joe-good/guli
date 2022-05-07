@@ -22,7 +22,7 @@ import java.util.Map;
  * @Date 2021.06.22
  */
 @Api(description = "前台讲师管理")
-@CrossOrigin
+//@CrossOrigin
 @RestController
 @RequestMapping("/eduservice/frontTeacher")
 public class TeacherFrontController {
@@ -55,6 +55,8 @@ public class TeacherFrontController {
         map.put("total", total);
         map.put("hasNext", hasNext);
         map.put("hasPrevious", hasPrevious);
+        // 此处code码得加上，因为前端拦截器reponse有拦截
+        map.put("code", 20000);
         return map;
     }
 

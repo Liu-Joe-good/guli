@@ -20,7 +20,7 @@ public class SwaggerConfig {
                 .groupName("webApi")
                 .apiInfo(webApiInfo())
                 .select()
-                .paths(Predicates.not(PathSelectors.regex("/admin/.*"))) // 接口有这两个不显示
+//                .paths(Predicates.not(PathSelectors.regex("/admin/.*"))) // 接口有这两个不显示
                 .paths(Predicates.not(PathSelectors.regex("/error.*")))
                 .build();
     }

@@ -19,4 +19,11 @@ public interface MemberService extends IService<Member> {
     boolean register(RegisterVo registerVo);
 
     Member judgeOpenid(String openid);
+
+    /**
+     * 统计某天注册总人数
+     * @param day
+     * @return
+     */
+    Integer getRegisterCount(String day);
 }

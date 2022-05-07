@@ -6,7 +6,6 @@ import com.atguigu.educms.service.CrmBannerService;
 import com.atguigu.oss.commonutils.R;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +20,7 @@ import java.util.List;
  * @author testjava
  * @since 2021-02-01
  */
-@CrossOrigin
+//@CrossOrigin
 @RestController
 @RequestMapping("/educms/crm-banner")
 @Api(description = "轮播图数据管理")
